@@ -1,0 +1,78 @@
+﻿<Window x:Class="SmartExpense.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SmartExpense"
+        mc:Ignorable="d"
+        Height="600"
+        Width="920"
+        WindowStyle="None"
+        ResizeMode="CanMinimize"
+        Background="Transparent"
+        AllowsTransparency="True">
+    
+    <Border Background="#272537"
+            CornerRadius="10">
+        <Grid ShowGridLines="False">
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            
+            <TextBlock Grid.Row="0"
+                       Grid.Column="0"
+                       Text="Розумні витрати"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       Foreground="Azure"
+                       FontSize="18"
+                       Margin="0, 0, 0, 0"
+                       Padding="0"/>
+            
+            <StackPanel Grid.Row="1"
+                        Grid.Column="0">
+                <RadioButton Content="Головна"
+                             IsChecked="True"
+                             Command="{Binding HomeViewCommand}"
+                             Style="{StaticResource MenuButtonStyle}"/>
+                
+                <RadioButton Content="Транзакції"
+                             Command="{Binding TransactionViewCommand}"
+                             Style="{StaticResource MenuButtonStyle}"/>
+                
+                <RadioButton Content="Рахунки"
+                             Style="{StaticResource MenuButtonStyle}"/>
+                
+                <RadioButton Content="Профіль"
+                             Style="{StaticResource MenuButtonStyle}"/>
+                
+                <RadioButton Content="Налаштування"
+                             Style="{StaticResource MenuButtonStyle}"/>
+            </StackPanel>
+            
+            <StackPanel Grid.Row="0"
+                        Grid.Column="1"
+                        Orientation="Horizontal"
+                        FlowDirection="LeftToRight"
+                        HorizontalAlignment="Right"
+                        Height="25"
+                        Margin="0, 0, 12, 0">
+                <Button Tag="MinimizeButton"
+                        Content="-"
+                        Click="MinimizeButton_OnClick"
+                        Style="{StaticResource ControlButtonStyle}"/>
+                <Button Tag="CloseButton"
+                        Content="X"
+                        Click="CloseButton_OnClick"
+                        Style="{StaticResource ControlButtonStyle}"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+    
+</Window>
