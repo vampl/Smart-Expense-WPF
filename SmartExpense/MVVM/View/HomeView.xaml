@@ -3,18 +3,78 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:SmartExpense.MVVM.View"
              mc:Ignorable="d"
-             d:DesignHeight="300"
-             d:DesignWidth="300"
+             d:DesignHeight="430" d:DesignWidth="720"
              Background="Transparent">
-    <StackPanel>
-        <TextBlock Text="Home View!"
-                   Foreground="Azure"/>
-        
-        <StackPanel>
-            <TextBlock Text="Home View!"
-                       Foreground="Blue"/>
-        </StackPanel>
-    </StackPanel>
+    
+    <Border Background="#272537" CornerRadius="10">
+        <Grid ShowGridLines="True">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            
+            <Grid Grid.Row="0"
+                  ShowGridLines="True">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <StackPanel Grid.Column="0"
+                            VerticalAlignment="Center">
+                    <TextBlock Text="Надходження"
+                               Style="{StaticResource TextStyle}"/>
+                    <TextBlock Text="{Binding Income}"
+                               Style="{StaticResource TextStyle}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1"
+                            VerticalAlignment="Center">
+                    <TextBlock Text="Витрати"
+                               Style="{StaticResource TextStyle}"/>
+                    <TextBlock Text="{Binding Expense}"
+                               Style="{StaticResource TextStyle}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="2" 
+                            VerticalAlignment="Center">
+                    <TextBlock Text="Баланс" 
+                               Style="{StaticResource TextStyle}"/>
+                    <TextBlock Text="{Binding Balance}"
+                               Style="{StaticResource TextStyle}"/>
+                </StackPanel>
+            </Grid>
+            
+            <Grid Grid.Row="1" ShowGridLines="True">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="480"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <DataGrid Grid.Column="0"
+                          x:Name="TransactionDataGrid"
+                          Style="{StaticResource DataGridStyle}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Сума"/>
+                        <DataGridTextColumn Header="Тип"/>
+                        <DataGridTextColumn Header="Опис"/>
+                        <DataGridTextColumn Header="Дата"/>
+                        <DataGridTextColumn Header="Рахунок"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                
+                <Grid Grid.Column="1" ShowGridLines="True">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    
+                    <Calendar Grid.Row="0" 
+                              Style="{StaticResource CalendarStyle}"/>
+                </Grid>
+                
+            </Grid>
+            
+        </Grid>
+    </Border>
 </UserControl>

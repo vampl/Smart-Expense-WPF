@@ -12,4 +12,9 @@
       <Folder Include="MVVM\Model\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Syncfusion.SfChart.WPF" Version="21.2.3" />
+      <PackageReference Include="Syncfusion.Shared.WPF" Version="21.2.3" />
+    </ItemGroup>
+
 </Project>

@@ -5,42 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModel="clr-namespace:SmartExpense.MVVM.ViewModel"
         mc:Ignorable="d"
-        Height="600"
-        Width="920"
-        WindowStyle="None"
-        ResizeMode="CanMinimize"
-        Background="Transparent"
-        AllowsTransparency="True">
+        Height="480" Width="860"
+        WindowStyle="None" ResizeMode="CanMinimize"
+        AllowsTransparency="True" Background="Transparent">
 
     <Window.DataContext>
         <viewModel:MainViewModel/>
     </Window.DataContext>
 
-    <Border Background="#272537"
-            CornerRadius="10">
+    <Border Background="#322f46"
+            CornerRadius="10"
+            MouseDown="Border_MouseDown">
         <Grid ShowGridLines="False">
             
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="120"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
+                <RowDefinition Height="30"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
             
-            <TextBlock Grid.Row="0"
-                       Grid.Column="0"
+            <TextBlock Grid.Row="0" Grid.Column="0"
                        Text="Розумні витрати"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Center"
-                       Foreground="Azure"
-                       FontSize="16"
-                       Margin="0, 0, 0, 0"
-                       Padding="0"/>
+                       Style="{StaticResource TextStyle}"
+                       Margin="5, 0, 0, 0"/>
             
-            <StackPanel Grid.Row="1"
-                        Grid.Column="0">
+            <StackPanel Grid.Row="1" Grid.Column="0">
                 <RadioButton Content="Головна"
                              IsChecked="True"
                              Command="{Binding HomeViewCommand}"
@@ -53,36 +45,23 @@
                 <RadioButton Content="Рахунки"
                              Command="{Binding AccountViewCommand}"
                              Style="{StaticResource MenuButtonStyle}"/>
-                
-                <!-- ToDo: Імплементувати в майбутньому -->
-                <!--
-                <RadioButton Content="Профіль"
-                             Style="{StaticResource MenuButtonStyle}"/>
-                
-                <RadioButton Content="Налаштування"
-                             Style="{StaticResource MenuButtonStyle}"/>
-                -->
             </StackPanel>
             
-            <StackPanel Grid.Row="0"
-                        Grid.Column="1"
-                        Orientation="Horizontal"
-                        FlowDirection="LeftToRight"
-                        HorizontalAlignment="Right"
-                        Margin="0, 0, 0, 0">
+            <StackPanel Grid.Row="0" Grid.Column="1"
+                        Orientation="Horizontal" FlowDirection="LeftToRight" 
+                        HorizontalAlignment="Right" VerticalAlignment="Center">
                 <Button Tag="MinimizeButton"
-                        Content="_"
+                        Content="&#128469;"
                         Click="MinimizeButton_OnClick"
                         Style="{StaticResource ControlButtonStyle}"/>
                 <Button Tag="CloseButton"
-                        Content="X"
+                        Content="&#x2715;"
                         Click="CloseButton_OnClick"
                         Style="{StaticResource ControlButtonStyle}"/>
             </StackPanel>
             
-            <ContentControl Grid.Row="1"
-                            Grid.Column="1"
-                            Margin="10"
+            <ContentControl Grid.Row="1" Grid.Column="1"
+                            Margin="10, 0, 10, 10"
                             Content="{Binding CurrentView}"/>
         </Grid>
     </Border>

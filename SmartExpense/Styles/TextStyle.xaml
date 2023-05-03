@@ -1,0 +1,12 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style x:Key="TextStyle" TargetType="TextBlock">
+        <Style.Setters>
+            <Setter Property="FontFamily" Value="Ubuntu"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="Azure"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style.Setters>
+    </Style>
+</ResourceDictionary>

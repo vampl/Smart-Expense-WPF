@@ -9,8 +9,11 @@
         
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/TextStyle.xaml"/>
                 <ResourceDictionary Source="Styles/MenuButtonStyle.xaml"/>
                 <ResourceDictionary Source="Styles/ControlButtonStyle.xaml"/>
+                <ResourceDictionary Source="Styles/DataGridStyle.xaml"/>
+                <ResourceDictionary Source="Styles/CalendarStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             
             <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
@@ -19,6 +22,10 @@
             
             <DataTemplate DataType="{x:Type viewModel:TransactionViewModel}">
                 <view:TransactionView/>
+            </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type viewModel:AccountViewModel}">
+                <view:AccountView/>
             </DataTemplate>
             
         </ResourceDictionary>
