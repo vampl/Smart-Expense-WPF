@@ -1,9 +1,9 @@
-﻿<Window x:Class="SmartExpense.MainWindow"
+﻿    <Window x:Class="SmartExpense.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SmartExpense"
+        xmlns:viewModel="clr-namespace:SmartExpense.MVVM.ViewModel"
         mc:Ignorable="d"
         Height="600"
         Width="920"
@@ -11,7 +11,11 @@
         ResizeMode="CanMinimize"
         Background="Transparent"
         AllowsTransparency="True">
-    
+
+    <Window.DataContext>
+        <viewModel:MainViewModel/>
+    </Window.DataContext>
+
     <Border Background="#272537"
             CornerRadius="10">
         <Grid ShowGridLines="False">
@@ -21,7 +25,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="40"/>
+                <RowDefinition Height="50"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
             
@@ -31,7 +35,7 @@
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
                        Foreground="Azure"
-                       FontSize="18"
+                       FontSize="16"
                        Margin="0, 0, 0, 0"
                        Padding="0"/>
             
@@ -47,13 +51,17 @@
                              Style="{StaticResource MenuButtonStyle}"/>
                 
                 <RadioButton Content="Рахунки"
+                             Command="{Binding AccountViewCommand}"
                              Style="{StaticResource MenuButtonStyle}"/>
                 
+                <!-- ToDo: Імплементувати в майбутньому -->
+                <!--
                 <RadioButton Content="Профіль"
                              Style="{StaticResource MenuButtonStyle}"/>
                 
                 <RadioButton Content="Налаштування"
                              Style="{StaticResource MenuButtonStyle}"/>
+                -->
             </StackPanel>
             
             <StackPanel Grid.Row="0"
@@ -61,10 +69,9 @@
                         Orientation="Horizontal"
                         FlowDirection="LeftToRight"
                         HorizontalAlignment="Right"
-                        Height="25"
-                        Margin="0, 0, 12, 0">
+                        Margin="0, 0, 0, 0">
                 <Button Tag="MinimizeButton"
-                        Content="-"
+                        Content="_"
                         Click="MinimizeButton_OnClick"
                         Style="{StaticResource ControlButtonStyle}"/>
                 <Button Tag="CloseButton"
@@ -72,7 +79,12 @@
                         Click="CloseButton_OnClick"
                         Style="{StaticResource ControlButtonStyle}"/>
             </StackPanel>
+            
+            <ContentControl Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="10"
+                            Content="{Binding CurrentView}"/>
         </Grid>
     </Border>
-    
-</Window>
+
+    </Window>
