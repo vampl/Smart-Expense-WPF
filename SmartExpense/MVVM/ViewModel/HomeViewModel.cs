@@ -6,7 +6,7 @@ using LiveCharts.Defaults;
 using LiveCharts.Wpf;
 using SmartExpense.Core;
 using SmartExpense.Core.Database;
-using SmartExpense.Core.Database.DataModels;
+using SmartExpense.MVVM.Model;
 
 namespace SmartExpense.MVVM.ViewModel;
 

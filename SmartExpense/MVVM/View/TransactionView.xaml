@@ -14,7 +14,7 @@
     </UserControl.DataContext>
     
     <Border Background="#c3c3c3" CornerRadius="10">
-        <Grid ShowGridLines="True">
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
                 <RowDefinition/>
@@ -64,16 +64,10 @@
                                             Width="75">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <Button x:Name="EditRowButton"
-                                            Content="/"
-                                            Style="{StaticResource CellButtonStyle}"
-                                            Click="DeleteRowButton_OnClick"/>
-                                    <Button x:Name="DeleteRowButton"
-                                            Content="-"
-                                            Style="{StaticResource CellButtonStyle}"
-                                            Click="ButtonBase_OnClick"/>
-                                </StackPanel>
+                                <Button x:Name="DeleteRowButton"
+                                        Content="-"
+                                        Style="{StaticResource CellButtonStyle}"
+                                        Click="DeleteRowButton_OnClick"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

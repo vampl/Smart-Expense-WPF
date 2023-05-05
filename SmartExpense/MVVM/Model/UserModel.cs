@@ -1,4 +1,4 @@
-﻿namespace SmartExpense.Core.Database.DataModels;
+﻿namespace SmartExpense.MVVM.Model;
 
 public class UserModel
 {

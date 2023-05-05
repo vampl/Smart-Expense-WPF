@@ -2,7 +2,7 @@
 using System.Linq;
 using SmartExpense.Core;
 using SmartExpense.Core.Database;
-using SmartExpense.Core.Database.DataModels;
+using SmartExpense.MVVM.Model;
 
 namespace SmartExpense.MVVM.ViewModel;
 

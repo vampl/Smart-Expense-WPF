@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace SmartExpense.Core.Database.DataModels;
+namespace SmartExpense.MVVM.Model;
 
 public class TransactionModel
 {

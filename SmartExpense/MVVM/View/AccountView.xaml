@@ -4,10 +4,72 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:SmartExpense.MVVM.View"
+             xmlns:viewModel1="clr-namespace:SmartExpense.MVVM.ViewModel"
              mc:Ignorable="d"
              d:DesignHeight="430" d:DesignWidth="720"
              Background="Transparent">
+   <UserControl.DataContext>
+        <viewModel1:AccountViewModel/>
+    </UserControl.DataContext>
+    
     <Border Background="#c3c3c3" CornerRadius="10">
-        
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                
+                <StackPanel Grid.Column="0">
+                    <TextBox x:Name="SearchBox" 
+                             Height="30" Width="250"
+                             Margin="10,10,10,10" 
+                             VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                </StackPanel>
+                
+                <StackPanel Grid.Column="1"
+                            HorizontalAlignment="Right">
+                    <Button x:Name="AddRowButton"
+                            Content="Додати новий запис"
+                            Style="{StaticResource TransactionAddButton}"
+                            VerticalAlignment="Center" HorizontalAlignment="Center"
+                            Margin="10, 10, 10, 10"></Button>
+                </StackPanel>
+            </Grid>
+            
+            <DataGrid Grid.Row="1"
+                x:Name="AccountDataGrid"
+                Style="{StaticResource AccountDataGridStyle}"
+                ItemsSource="{Binding AccountsList}"
+                IsTextSearchEnabled="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Назва"
+                                        Binding="{Binding Path=Title}"/>
+                    <DataGridTextColumn Header="Тип"
+                                        Binding="{Binding Path=Type}"/>
+                    <DataGridTextColumn Header="Опис"
+                                        Binding="{Binding Path=Discription}"/>
+                    <DataGridTextColumn Header="Баланс"
+                                        Binding="{Binding Path=Amount}"/>
+                    <DataGridTemplateColumn Header="Операція"
+                                            IsReadOnly="True"
+                                            Width="75">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="DeleteRowButton"
+                                        Content="-"
+                                        Style="{StaticResource CellButtonStyle}"
+                                        Click="DeleteRowButton_OnClick"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
     </Border>
 </UserControl>

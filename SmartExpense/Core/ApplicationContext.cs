@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using SmartExpense.Core.Database.DataModels;
+using SmartExpense.MVVM.Model;
 
 namespace SmartExpense.Core.Database;
 
