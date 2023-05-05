@@ -43,7 +43,7 @@
         <Setter Property="AutoGenerateColumns" Value="False" />
         <Setter Property="IsReadOnly" Value="False" />
         <Setter Property="CanUserReorderColumns" Value="False" />
-        <Setter Property="CanUserAddRows" Value="True" />
+        <Setter Property="CanUserAddRows" Value="False" />
         <Setter Property="CanUserDeleteRows" Value="False" />
         <Setter Property="ColumnWidth" Value="*" />
         <Setter Property="FontFamily" Value="Ubuntu" />
