@@ -4,7 +4,7 @@
         <Style.Setters>
             <Setter Property="FontFamily" Value="Ubuntu"/>
             <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Foreground" Value="Azure"/>
+            <Setter Property="Foreground" Value="Black"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
         </Style.Setters>
