@@ -8,12 +8,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Images\" />
       <Folder Include="MVVM\Model\" />
+      <Folder Include="TestCases\" />
     </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
+      <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0" />
     </ItemGroup>
 
 </Project>
