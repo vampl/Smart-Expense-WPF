@@ -13,8 +13,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Syncfusion.SfChart.WPF" Version="21.2.3" />
-      <PackageReference Include="Syncfusion.Shared.WPF" Version="21.2.3" />
+      <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
     </ItemGroup>
 
 </Project>

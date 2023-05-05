@@ -1,5 +1,4 @@
 ﻿using SmartExpense.Core;
-using SmartExpense.MVVM.View;
 
 namespace SmartExpense.MVVM.ViewModel;
 
