@@ -3,19 +3,25 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             xmlns:viewModel="clr-namespace:SmartExpense.MVVM.ViewModel"
              mc:Ignorable="d"
              d:DesignHeight="430" d:DesignWidth="720"
              Background="Transparent">
     
-    <Border Background="#272537" CornerRadius="10">
-        <Grid ShowGridLines="True">
+    <UserControl.DataContext>
+        <viewModel:HomeViewModel/>
+    </UserControl.DataContext>
+    
+    <Border Background="#c3c3c3" CornerRadius="10">
+        <Grid ShowGridLines="False">
             <Grid.RowDefinitions>
-                <RowDefinition Height="100"/>
+                <RowDefinition Height="75"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
             
             <Grid Grid.Row="0"
-                  ShowGridLines="True">
+                  ShowGridLines="False">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
@@ -33,7 +39,7 @@
                             VerticalAlignment="Center">
                     <TextBlock Text="Витрати"
                                Style="{StaticResource TextStyle}"/>
-                    <TextBlock Text="{Binding Expense}"
+                    <TextBlock Text="{Binding Outcome}"
                                Style="{StaticResource TextStyle}"/>
                 </StackPanel>
                 <StackPanel Grid.Column="2" 
@@ -45,7 +51,7 @@
                 </StackPanel>
             </Grid>
             
-            <Grid Grid.Row="1" ShowGridLines="True">
+            <Grid Grid.Row="1" ShowGridLines="False">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="480"/>
                     <ColumnDefinition Width="*"/>
@@ -63,7 +69,7 @@
                     </DataGrid.Columns>
                 </DataGrid>
                 
-                <Grid Grid.Column="1" ShowGridLines="True">
+                <Grid Grid.Column="1" ShowGridLines="False">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>
@@ -71,10 +77,17 @@
                     
                     <Calendar Grid.Row="0" 
                               Style="{StaticResource CalendarStyle}"/>
+                    
+                    <lvc:PieChart Grid.Row="1"
+                                  x:Name="IncomeOutcomePieChart"
+                                  Series = "{Binding IncomeOutcomeSeriesCollection}"
+                                  Hoverable="True"
+                                  HorizontalAlignment="Center" VerticalAlignment="Center"
+                                  Margin="10, 10, 10, 10"
+                                  Width="170" Height="150">
+                    </lvc:PieChart>
                 </Grid>
-                
             </Grid>
-            
-        </Grid>
+         </Grid>
     </Border>
 </UserControl>

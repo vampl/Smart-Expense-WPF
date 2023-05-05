@@ -13,7 +13,7 @@
         <viewModel:MainViewModel/>
     </Window.DataContext>
 
-    <Border Background="#322f46"
+    <Border Background="#DCDCDC"
             CornerRadius="10"
             MouseDown="Border_MouseDown">
         <Grid ShowGridLines="False">

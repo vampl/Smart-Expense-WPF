@@ -5,16 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:SmartExpense.MVVM.View"
              mc:Ignorable="d"
-             d:DesignHeight="300" 
-             d:DesignWidth="300"
-             Background="#1f2b3a">
-    <StackPanel>
-        <TextBlock Text="Home View!"
-                   Foreground="Azure"/>
+             d:DesignHeight="430" d:DesignWidth="720"
+             Background="Transparent">
+    <Border Background="#c3c3c3" CornerRadius="10">
         
-        <StackPanel>
-            <TextBlock Text="Home View!"
-                       Foreground="Red"/>
-        </StackPanel>
-    </StackPanel>
+    </Border>
 </UserControl>
