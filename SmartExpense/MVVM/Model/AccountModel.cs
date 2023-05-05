@@ -2,7 +2,7 @@
 
 namespace SmartExpense.Core.Database.DataModels;
 
-public class Account
+public class AccountModel
 {
     public long Id { get; set; }
     public long OwnerId { get; set; }
@@ -10,5 +10,5 @@ public class Account
     public string Type { get; set; }
     public string Discription { get; set; }
     public decimal Amount { get; set; }
-    [Required] public User? User { get; set; }
+    [Required] public UserModel? User { get; set; }
 }

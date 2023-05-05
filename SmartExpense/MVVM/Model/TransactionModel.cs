@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SmartExpense.Core.Database.DataModels;
 
-public class Transaction
+public class TransactionModel
 {
     public long Id { get; set; }
     public long OwnerId { get; set; }
@@ -12,5 +12,5 @@ public class Transaction
     public DateTime CreationDate { get; set; }
     public string? Discription { get; set; }
     public string AccountTitle { get; set; }
-    [Required] public User? User { get; set; }
+    [Required] public UserModel? User { get; set; }
 }
