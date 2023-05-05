@@ -14,14 +14,13 @@
     </UserControl.DataContext>
     
     <Border Background="#c3c3c3" CornerRadius="10">
-        <Grid ShowGridLines="False">
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="75"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
             
-            <Grid Grid.Row="0"
-                  ShowGridLines="False">
+            <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
@@ -59,13 +58,19 @@
                 
                 <DataGrid Grid.Column="0"
                           x:Name="TransactionDataGrid"
-                          Style="{StaticResource DataGridStyle}">
+                          Style="{StaticResource HTransactionDataGridStyle}"
+                          ItemsSource="{Binding TransactionList}">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Сума"/>
-                        <DataGridTextColumn Header="Тип"/>
-                        <DataGridTextColumn Header="Опис"/>
-                        <DataGridTextColumn Header="Дата"/>
-                        <DataGridTextColumn Header="Рахунок"/>
+                        <DataGridTextColumn Header="Сума"
+                                            Binding="{Binding Path=Amount}"/>
+                        <DataGridTextColumn Header="Тип"
+                                            Binding="{Binding Path=Type}"/>
+                        <DataGridTextColumn Header="Опис"
+                                            Binding="{Binding Path=Discription}"/>
+                        <DataGridTextColumn Header="Дата"
+                                            Binding="{Binding Path=CreationDate}"/>
+                        <DataGridTextColumn Header="Рахунок"
+                                            Binding="{Binding Path=AccountTitle}"/>
                     </DataGrid.Columns>
                 </DataGrid>
                 
@@ -80,7 +85,7 @@
                     
                     <lvc:PieChart Grid.Row="1"
                                   x:Name="IncomeOutcomePieChart"
-                                  Series = "{Binding IncomeOutcomeSeriesCollection}"
+                                  Series = "{Binding PieSeriesCollection}"
                                   Hoverable="True"
                                   HorizontalAlignment="Center" VerticalAlignment="Center"
                                   Margin="10, 10, 10, 10"
