@@ -14,6 +14,8 @@
                 <ResourceDictionary Source="Styles/ControlButtonStyle.xaml"/>
                 <ResourceDictionary Source="Styles/DataGridStyle.xaml"/>
                 <ResourceDictionary Source="Styles/CalendarStyle.xaml"/>
+                <ResourceDictionary Source="Styles/CellButtonStyle.xaml"/>
+                <ResourceDictionary Source="Styles/TransactionAddButtonStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             
             <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
