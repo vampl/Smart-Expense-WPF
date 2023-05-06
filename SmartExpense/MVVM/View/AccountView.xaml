@@ -45,7 +45,7 @@
             <DataGrid Grid.Row="1"
                 x:Name="AccountDataGrid"
                 Style="{StaticResource AccountDataGridStyle}"
-                ItemsSource="{Binding AccountsList}"
+                ItemsSource="{Binding Accounts}"
                 IsTextSearchEnabled="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Назва"
@@ -64,7 +64,9 @@
                                 <Button x:Name="DeleteRowButton"
                                         Content="-"
                                         Style="{StaticResource CellButtonStyle}"
-                                        Click="DeleteRowButton_OnClick"/>
+                                        Command="{Binding Path=DataContext.RemoveCommand,
+                                        RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" 
+                                        CommandParameter="{Binding}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
