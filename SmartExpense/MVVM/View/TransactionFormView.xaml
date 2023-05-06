@@ -1,0 +1,93 @@
+﻿<Window x:Class="SmartExpense.MVVM.View.TransactionFormView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:SmartExpense.MVVM.View"
+        xmlns:viewModel="clr-namespace:SmartExpense.MVVM.ViewModel"
+        mc:Ignorable="d"
+        WindowStyle="None" ResizeMode="CanMinimize"
+        Height="275" Width="250"
+        AllowsTransparency="True" Background="Transparent">
+    
+    <Window.DataContext>
+        <viewModel:TransactionFormViewModel/>
+    </Window.DataContext>
+    
+    <Border Background="#c3c3c3" CornerRadius="10">
+        <Grid ShowGridLines="True">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition/>
+                <RowDefinition Height="35"/>
+            </Grid.RowDefinitions>
+            
+            <StackPanel Grid.Row="0"
+                        Orientation="Horizontal" FlowDirection="LeftToRight" 
+                        HorizontalAlignment="Right" VerticalAlignment="Center">
+                <Button Tag="CloseButton"
+                        Content="&#x2715;"
+                        Style="{StaticResource ControlButtonStyle}"
+                        Click="ButtonBase_OnClick"/>
+            </StackPanel>
+            
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <TextBlock Grid.Row="0" Grid.Column="0" 
+                           Text="Сума"
+                           Style="{StaticResource TextStyle}"/>
+                <TextBlock Grid.Row="1" Grid.Column="0" 
+                           Text="Тип транзакції"
+                           Style="{StaticResource TextStyle}"/>
+                <TextBlock Grid.Row="2" Grid.Column="0" 
+                           Text="Дата створення"
+                           Style="{StaticResource TextStyle}"/>
+                <TextBlock Grid.Row="3" Grid.Column="0" 
+                           Text="Опис"
+                           Style="{StaticResource TextStyle}"/>
+                <TextBlock Grid.Row="4" Grid.Column="0" 
+                           Text="Рахунок"
+                           Style="{StaticResource TextStyle}"/>
+                
+                <TextBox Grid.Row="0" Grid.Column="1"
+                         Margin="10, 10, 10, 10"/>
+                
+                <ComboBox Grid.Row="1" Grid.Column="1"
+                          Margin="10, 10, 10, 10"
+                          IsEditable="False"
+                          ItemsSource="{Binding TransactionTypes }"/>
+                
+                <DatePicker Grid.Row="2" Grid.Column="1"
+                            Margin="10, 10, 10, 10"/>
+                
+                <TextBox Grid.Row="3" Grid.Column="1"
+                         Margin="10, 10, 10, 10"/>
+                
+                <ComboBox Grid.Row="4" Grid.Column="1"
+                          x:Name="AccountsComboBox"
+                          Margin="10, 10, 10, 10"
+                          IsEditable="False"
+                          ItemsSource="{Binding AccountsTitle }"/>
+            </Grid>
+            
+            <Button Grid.Row="2"
+                    x:Name="AddRowButton"
+                    Content="Готово"
+                    Style="{StaticResource TransactionAddButton}"
+                    VerticalAlignment="Center" HorizontalAlignment="Center"
+                    Margin="10, 10, 10, 10"></Button>
+        </Grid>
+    </Border>
+</Window>
