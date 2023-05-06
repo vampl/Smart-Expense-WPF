@@ -1,27 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows;
 using Microsoft.EntityFrameworkCore;
 using SmartExpense.MVVM.Model;
 
-namespace SmartExpense.Core.Database;
+namespace SmartExpense.Core;
 
 public class ApplicationContext : DbContext
 {
-    public List<TransactionModel> Transactions { get; set; }
-
+    public DbSet<UserModel> Users { get; set; } = null!;
+    public DbSet<TransactionModel> Transactions { get; set; } = null!;
+    public DbSet<AccountModel> Accounts { get; set; } = null!;
+ 
     public ApplicationContext()
     {
-        if (Transactions == null)
+        try
         {
-            Transactions = new List<TransactionModel>
-            {
-                new() { OwnerId = 10000001, Amount = 100.20M, Type = "Витрата", CreationDate = DateTime.Today.Date, Discription = "Buy some drink", AccountTitle = "Credit Card"},
-                new() { OwnerId = 10000001, Amount = 1290.80M, Type = "Надходження", CreationDate = DateTime.Today.Date, Discription = "Wage", AccountTitle = "Card"},
-                new() { OwnerId = 10000002, Amount = 100.20M, Type = "Надходження", CreationDate = DateTime.Today.Date, Discription = "But some drink", AccountTitle = "Credit Card"},
-                new() { OwnerId = 10000003, Amount = 100.20M, Type = "Витрата", CreationDate = DateTime.Today.Date, AccountTitle = "Credit Cart"},
-                new() { OwnerId = 10000001, Amount = 10.0M, Type = "Витрата", CreationDate = DateTime.Today.Date, Discription = "Tic-tac", AccountTitle = "Wallet"},
-                new() { OwnerId = 10000001, Amount = 100.20M, Type = "Надходження", CreationDate = DateTime.Today.Date, Discription = "But some drink", AccountTitle = "Card"},
-            };
+            Database.EnsureCreated();
         }
+        catch (Exception e)
+        {
+            MessageBox.Show(e.Message);
+        }
+    }
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        try
+        {
+            optionsBuilder.UseMySql("server=localhost;user=root;password=root_password;database=smartexpensedatabase;",
+                new MySqlServerVersion(new Version(8, 0, 33)));
+        }
+        catch (Exception e)
+        {
+            MessageBox.Show(e.Message);
+        }
+        
     }
 }
