@@ -39,14 +39,15 @@
                             Content="Додати новий запис"
                             Style="{StaticResource TransactionAddButton}"
                             VerticalAlignment="Center" HorizontalAlignment="Center"
-                            Margin="10, 10, 10, 10"></Button>
+                            Margin="10, 10, 10, 10"
+                            Click="AddRowButton_OnClick"/>
                 </StackPanel>
             </Grid>
             
             <DataGrid Grid.Row="1"
                 x:Name="TransactionDataGrid"
                 Style="{StaticResource TTransactionDataGridStyle}"
-                ItemsSource="{Binding TransactionList}"
+                ItemsSource="{Binding Transaction}"
                 IsTextSearchEnabled="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Сума"
@@ -61,13 +62,15 @@
                                         Binding="{Binding Path=AccountTitle}"/>
                     <DataGridTemplateColumn Header="Операція"
                                             IsReadOnly="True"
-                                            Width="75">
+                                            Width="70">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button x:Name="DeleteRowButton"
                                         Content="-"
                                         Style="{StaticResource CellButtonStyle}"
-                                        Click="DeleteRowButton_OnClick"/>
+                                        Command="{Binding Path=DataContext.RemoveCommand,
+                                        RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" 
+                                        CommandParameter="{Binding}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

@@ -12,13 +12,8 @@ public partial class TransactionView : UserControl
         InitializeComponent();
     }
 
-    private void DeleteRowButton_OnClick(object sender, RoutedEventArgs e)
+    private void AddRowButton_OnClick(object sender, RoutedEventArgs e)
     {
-        var row = (DataRowView)TransactionDataGrid.SelectedItem;
-    }
-
-    private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
-    {
-        TransactionDataGrid.BeginEdit();
+        new TransactionFormView().Show();
     }
 }
