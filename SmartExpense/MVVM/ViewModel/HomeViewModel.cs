@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using LiveCharts;
 using LiveCharts.Defaults;
 using LiveCharts.Wpf;
 using SmartExpense.Core;
-using SmartExpense.Core.Database;
 using SmartExpense.MVVM.Model;
 
 namespace SmartExpense.MVVM.ViewModel;
@@ -17,9 +17,6 @@ public class HomeViewModel : ObservableObject
     public SeriesCollection PieSeriesCollection { get; set; }
 
     private decimal _income;
-    private decimal _outcome;
-    private decimal _balance;
-
     public decimal Income
     {
         get => _income;
@@ -30,6 +27,7 @@ public class HomeViewModel : ObservableObject
         }
     }
     
+    private decimal _outcome;
     public decimal Outcome
     {
         get => _outcome;
@@ -40,6 +38,7 @@ public class HomeViewModel : ObservableObject
         }
     }
     
+    private decimal _balance;
     public decimal Balance
     {
         get => _balance;
@@ -50,8 +49,8 @@ public class HomeViewModel : ObservableObject
         }
     }
     
-    private List<TransactionModel> _transactionsList;
-    public List<TransactionModel> TransactionList
+    private ObservableCollection<TransactionModel> _transactionsList;
+    public ObservableCollection<TransactionModel> TransactionList
     {
         get => _transactionsList;
         set
@@ -64,13 +63,13 @@ public class HomeViewModel : ObservableObject
     public HomeViewModel()
     {
         _context = new ApplicationContext();
-        var userTransactions = _context.Transactions.Where(x => x.OwnerId == 10000001).ToList();
+        var userTransactions = _context.Transactions.Where(x => x.User.UserName == "10000001").ToList();
 
         Income = userTransactions.Where(x => x.Type == "Надходження").Sum(x=> x.Amount);
         Outcome = userTransactions.Where(x => x.Type == "Витрата").Sum(x=> x.Amount);
         Balance = Income - Outcome;
         
-        TransactionList = userTransactions;
+        TransactionList = new ObservableCollection<TransactionModel>(userTransactions);
 
         PieSeriesCollection = new SeriesCollection
         {

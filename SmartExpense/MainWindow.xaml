@@ -16,7 +16,7 @@
     <Border Background="#DCDCDC"
             CornerRadius="10"
             MouseDown="Border_MouseDown">
-        <Grid ShowGridLines="False">
+        <Grid>
             
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="120"/>
