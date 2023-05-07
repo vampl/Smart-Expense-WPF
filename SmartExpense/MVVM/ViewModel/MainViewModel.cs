@@ -1,16 +1,22 @@
-﻿using SmartExpense.Core;
+﻿using System;
+using System.Windows;
+using SmartExpense.Core;
+using SmartExpense.MVVM.Model;
 
 namespace SmartExpense.MVVM.ViewModel;
 
 public class MainViewModel : ObservableObject
 {
-    public RelayCommand HomeViewCommand { get; set; }
-    public RelayCommand TransactionViewCommand { get; set; }
-    public RelayCommand AccountViewCommand { get; set; }
-    
-    public HomeViewModel HomeVm { get; set; }
-    public TransactionViewModel TransactionVm { get; set; }
-    public AccountViewModel AccountVm { get; set; }
+    private UserModel _user = null!;
+    protected UserModel User { get; set; } = new UserModel { Username = "10000001", Password = "10000001"};
+
+    public RelayCommand HomeViewCommand { get; set; } = null!;
+    public RelayCommand TransactionViewCommand { get; set; } = null!;
+    public RelayCommand AccountViewCommand { get; set; } = null!;
+
+    private HomeViewModel HomeVm { get; set; } = null!;
+    private TransactionViewModel TransactionVm { get; set; } = null!;
+    private AccountViewModel AccountVm { get; set; } = null!;
 
     private object? _currentView;
 
@@ -26,14 +32,21 @@ public class MainViewModel : ObservableObject
 
     public MainViewModel()
     {
-        HomeVm = new HomeViewModel();
-        TransactionVm = new TransactionViewModel();
-        AccountVm = new AccountViewModel();
+        try
+        {
+            HomeVm = new HomeViewModel();
+            TransactionVm = new TransactionViewModel();
+            AccountVm = new AccountViewModel();
         
-        CurrentView = HomeVm;
+            CurrentView = HomeVm;
 
-        HomeViewCommand = new RelayCommand(_ => { CurrentView = HomeVm; });
-        TransactionViewCommand = new RelayCommand(_ => { CurrentView = TransactionVm; });
-        AccountViewCommand = new RelayCommand(_ => { CurrentView = AccountVm; });
+            HomeViewCommand = new RelayCommand(_ => { CurrentView = HomeVm; });
+            TransactionViewCommand = new RelayCommand(_ => { CurrentView = TransactionVm; });
+            AccountViewCommand = new RelayCommand(_ => { CurrentView = AccountVm; });
+        }
+        catch (Exception exception)
+        {
+            MessageBox.Show(exception.ToString());
+        }
     }
 }

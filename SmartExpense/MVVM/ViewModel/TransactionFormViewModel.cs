@@ -4,7 +4,6 @@ using SmartExpense.Core;
 
 namespace SmartExpense.MVVM.ViewModel;
 
-/* ToDo: створити механізм передачі заповненої форми до таблиці та додати можливість пересування*/
 public class TransactionFormViewModel : TransactionViewModel
 {
     private const string TEXT_INCOME_TYPE_DEFINOTION = "Надходження";
