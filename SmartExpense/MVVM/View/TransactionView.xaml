@@ -26,28 +26,22 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 
-                <StackPanel Grid.Column="0">
-                    <TextBox x:Name="SearchBox" 
-                             Height="30" Width="250"
-                             Margin="10,10,10,10" 
-                             VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                </StackPanel>
-                
                 <StackPanel Grid.Column="1"
                             HorizontalAlignment="Right">
                     <Button x:Name="AddRowButton"
                             Content="Додати новий запис"
-                            Style="{StaticResource TransactionAddButton}"
-                            VerticalAlignment="Center" HorizontalAlignment="Center"
                             Margin="10, 10, 10, 10"
-                            Click="AddRowButton_OnClick"/>
+                            Style="{StaticResource TransactionAddButton}"
+                            Command="{Binding Path=DataContext.RowAddCommand,
+                            RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" 
+                            CommandParameter="{Binding}"/>
                 </StackPanel>
             </Grid>
             
             <DataGrid Grid.Row="1"
                 x:Name="TransactionDataGrid"
                 Style="{StaticResource TTransactionDataGridStyle}"
-                ItemsSource="{Binding Transaction}"
+                ItemsSource="{Binding Transactions}"
                 IsTextSearchEnabled="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Сума"
@@ -55,7 +49,7 @@
                     <DataGridTextColumn Header="Тип"
                                         Binding="{Binding Path=Type}"/>
                     <DataGridTextColumn Header="Опис"
-                                        Binding="{Binding Path=Discription}"/>
+                                        Binding="{Binding Path=Description}"/>
                     <DataGridTextColumn Header="Дата"
                                         Binding="{Binding Path=CreationDate}"/>
                     <DataGridTextColumn Header="Рахунок"
@@ -68,7 +62,7 @@
                                 <Button x:Name="DeleteRowButton"
                                         Content="-"
                                         Style="{StaticResource CellButtonStyle}"
-                                        Command="{Binding Path=DataContext.RemoveCommand,
+                                        Command="{Binding Path=DataContext.RowRemoveCommand,
                                         RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" 
                                         CommandParameter="{Binding}"/>
                             </DataTemplate>
