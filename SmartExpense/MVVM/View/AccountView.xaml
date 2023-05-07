@@ -25,20 +25,15 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 
-                <StackPanel Grid.Column="0">
-                    <TextBox x:Name="SearchBox" 
-                             Height="30" Width="250"
-                             Margin="10,10,10,10" 
-                             VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                </StackPanel>
-                
                 <StackPanel Grid.Column="1"
                             HorizontalAlignment="Right">
                     <Button x:Name="AddRowButton"
                             Content="Додати новий запис"
+                            Margin="10, 10, 10, 10"
                             Style="{StaticResource TransactionAddButton}"
-                            VerticalAlignment="Center" HorizontalAlignment="Center"
-                            Margin="10, 10, 10, 10"></Button>
+                            Command="{Binding Path=DataContext.RowAddCommand,
+                            RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" 
+                            CommandParameter="{Binding}"/>
                 </StackPanel>
             </Grid>
             
@@ -53,7 +48,7 @@
                     <DataGridTextColumn Header="Тип"
                                         Binding="{Binding Path=Type}"/>
                     <DataGridTextColumn Header="Опис"
-                                        Binding="{Binding Path=Discription}"/>
+                                        Binding="{Binding Path=Description}"/>
                     <DataGridTextColumn Header="Баланс"
                                         Binding="{Binding Path=Amount}"/>
                     <DataGridTemplateColumn Header="Операція"
@@ -64,7 +59,7 @@
                                 <Button x:Name="DeleteRowButton"
                                         Content="-"
                                         Style="{StaticResource CellButtonStyle}"
-                                        Command="{Binding Path=DataContext.RemoveCommand,
+                                        Command="{Binding Path=DataContext.RowRemoveCommand,
                                         RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" 
                                         CommandParameter="{Binding}"/>
                             </DataTemplate>

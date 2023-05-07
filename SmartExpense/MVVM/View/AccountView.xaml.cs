@@ -9,9 +9,4 @@ public partial class AccountView : UserControl
     {
         InitializeComponent();
     }
-
-    private void DeleteRowButton_OnClick(object sender, RoutedEventArgs e)
-    {
-        throw new System.NotImplementedException();
-    }
 }
