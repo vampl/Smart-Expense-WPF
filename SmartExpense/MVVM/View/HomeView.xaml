@@ -59,7 +59,7 @@
                 <DataGrid Grid.Column="0"
                           x:Name="TransactionDataGrid"
                           Style="{StaticResource HTransactionDataGridStyle}"
-                          ItemsSource="{Binding TransactionList}">
+                          ItemsSource="{Binding Transactions}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Сума"
                                             Binding="{Binding Path=Amount}"/>

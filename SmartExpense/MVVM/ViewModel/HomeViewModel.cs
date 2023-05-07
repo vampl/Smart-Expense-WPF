@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
+using System.Windows;
 using LiveCharts;
 using LiveCharts.Defaults;
 using LiveCharts.Wpf;
@@ -12,11 +11,15 @@ namespace SmartExpense.MVVM.ViewModel;
 
 public class HomeViewModel : ObservableObject
 {
-    private ApplicationContext _context;
+    private const string TEXT_INCOME_TYPE_DEFINOTION = "Надходження";
+    private const string TEXT_OUTCOME_TYPE_DEFINOTION = "Витрата";
     
-    public SeriesCollection PieSeriesCollection { get; set; }
+    // "Пирогова" діаграма
+    public SeriesCollection PieSeriesCollection { get; set; } = null!;
 
+    // Рядок підсумованих надходжень
     private decimal _income;
+
     public decimal Income
     {
         get => _income;
@@ -26,8 +29,10 @@ public class HomeViewModel : ObservableObject
             OnPropertyChanged();
         }
     }
-    
+
+    // Рядок підсумованих витрат
     private decimal _outcome;
+
     public decimal Outcome
     {
         get => _outcome;
@@ -37,8 +42,10 @@ public class HomeViewModel : ObservableObject
             OnPropertyChanged();
         }
     }
-    
+
+    // Рядок підсумованого балансу
     private decimal _balance;
+
     public decimal Balance
     {
         get => _balance;
@@ -48,43 +55,48 @@ public class HomeViewModel : ObservableObject
             OnPropertyChanged();
         }
     }
-    
-    private ObservableCollection<TransactionModel> _transactionsList;
-    public ObservableCollection<TransactionModel> TransactionList
+
+    private ObservableCollection<TransactionModel> _transactions = null!;
+
+    public ObservableCollection<TransactionModel> Transactions
     {
-        get => _transactionsList;
+        get => _transactions;
         set
         {
-            _transactionsList = value;
+            _transactions = value;
             OnPropertyChanged();
         }
     }
 
     public HomeViewModel()
     {
-        _context = new ApplicationContext();
-        var userTransactions = _context.Transactions.Where(x => x.User.UserName == "10000001").ToList();
+        try
+        {
+            var applicationContext = new ApplicationContext();
 
-        Income = userTransactions.Where(x => x.Type == "Надходження").Sum(x=> x.Amount);
-        Outcome = userTransactions.Where(x => x.Type == "Витрата").Sum(x=> x.Amount);
-        Balance = Income - Outcome;
-        
-        TransactionList = new ObservableCollection<TransactionModel>(userTransactions);
+           Transactions = applicationContext.GetUserTransactions("10000001");
+            Income = applicationContext.GetUserIncome("10000001");
+            Outcome = applicationContext.GetUserOutcome("10000001");
+            Balance = applicationContext.GetUserBalance("10000001");
 
-        PieSeriesCollection = new SeriesCollection
+            PieSeriesCollection = CreatePieChartFromData();
+        }
+        catch (Exception exception)
+        {
+            MessageBox.Show(exception.Message);
+        }
+    }
+
+    private SeriesCollection CreatePieChartFromData() =>
+        new()
         {
             new PieSeries
             {
-                Title = "Надходження",
-                Values = new ChartValues<ObservableValue> { new((double)Income) },
-                DataLabels = true
+                Title = "Надходження", Values = new ChartValues<ObservableValue> { new((double)Income) }, DataLabels = true
             },
             new PieSeries
             {
-                Title = "Витрати",
-                Values = new ChartValues<ObservableValue> { new((double)Outcome) },
-                DataLabels = true
+                Title = "Витрати", Values = new ChartValues<ObservableValue> { new((double)Outcome) }, DataLabels = true
             }
         };
-    }
 }
