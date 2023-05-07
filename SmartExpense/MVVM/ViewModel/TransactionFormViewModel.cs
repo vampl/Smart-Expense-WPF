@@ -4,22 +4,20 @@ using SmartExpense.Core;
 
 namespace SmartExpense.MVVM.ViewModel;
 
-public class TransactionFormViewModel
+/* ToDo: створити механізм передачі заповненої форми до таблиці та додати можливість пересування*/
+public class TransactionFormViewModel : TransactionViewModel
 {
-    private ApplicationContext _context;
-
-    public List<string> TransactionTypes { get; set; }
+    private const string TEXT_INCOME_TYPE_DEFINOTION = "Надходження";
+    private const string TEXT_OUTCOME_TYPE_DEFINOTION = "Витрата";
+    
     public List<string> AccountsTitle { get; set; }
+    public List<string> TransactionTypes { get; set; }
 
     public TransactionFormViewModel()
     {
-        TransactionTypes = new List<string>
-        {
-            new string("Надходження"),
-            new string("Витрата")
-        };
+        var applicationContext = new ApplicationContext();
 
-        _context = new ApplicationContext();
-        AccountsTitle = _context.Accounts.Where(x => x.User.UserName == "10000001").Select(x => x.Title).ToList();
+        TransactionTypes = new List<string> { TEXT_INCOME_TYPE_DEFINOTION, TEXT_OUTCOME_TYPE_DEFINOTION };
+        AccountsTitle = applicationContext.GetUserAccounts("10000001").Select(account => account.Title).ToList();
     }
 }

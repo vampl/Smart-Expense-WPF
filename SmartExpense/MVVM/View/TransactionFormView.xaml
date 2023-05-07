@@ -7,7 +7,7 @@
         xmlns:viewModel="clr-namespace:SmartExpense.MVVM.ViewModel"
         mc:Ignorable="d"
         WindowStyle="None" ResizeMode="CanMinimize"
-        Height="275" Width="250"
+        Height="300" Width="250"
         AllowsTransparency="True" Background="Transparent">
     
     <Window.DataContext>
@@ -15,11 +15,11 @@
     </Window.DataContext>
     
     <Border Background="#c3c3c3" CornerRadius="10">
-        <Grid ShowGridLines="True">
+        <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="25"/>
+                <RowDefinition Height="30"/>
                 <RowDefinition/>
-                <RowDefinition Height="35"/>
+                <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
             
             <StackPanel Grid.Row="0"
@@ -27,8 +27,7 @@
                         HorizontalAlignment="Right" VerticalAlignment="Center">
                 <Button Tag="CloseButton"
                         Content="&#x2715;"
-                        Style="{StaticResource ControlButtonStyle}"
-                        Click="ButtonBase_OnClick"/>
+                        Style="{StaticResource ControlButtonStyle}"/>
             </StackPanel>
             
             <Grid Grid.Row="1">
@@ -47,32 +46,36 @@
                 
                 <TextBlock Grid.Row="0" Grid.Column="0" 
                            Text="Сума"
-                           Style="{StaticResource TextStyle}"/>
+                           Style="{StaticResource TextStyle}" />
                 <TextBlock Grid.Row="1" Grid.Column="0" 
                            Text="Тип транзакції"
-                           Style="{StaticResource TextStyle}"/>
+                           Style="{StaticResource TextStyle}" />
                 <TextBlock Grid.Row="2" Grid.Column="0" 
                            Text="Дата створення"
-                           Style="{StaticResource TextStyle}"/>
+                           Style="{StaticResource TextStyle}" />
                 <TextBlock Grid.Row="3" Grid.Column="0" 
                            Text="Опис"
-                           Style="{StaticResource TextStyle}"/>
+                           Style="{StaticResource TextStyle}" />
                 <TextBlock Grid.Row="4" Grid.Column="0" 
                            Text="Рахунок"
-                           Style="{StaticResource TextStyle}"/>
+                           Style="{StaticResource TextStyle}" />
                 
                 <TextBox Grid.Row="0" Grid.Column="1"
+                         x:Name="AmountTextBox"
                          Margin="10, 10, 10, 10"/>
                 
                 <ComboBox Grid.Row="1" Grid.Column="1"
+                          x:Name="TypeComboBox"
                           Margin="10, 10, 10, 10"
                           IsEditable="False"
-                          ItemsSource="{Binding TransactionTypes }"/>
+                          ItemsSource="{Binding TransactionTypes}" />
                 
                 <DatePicker Grid.Row="2" Grid.Column="1"
+                            x:Name="DatePicker"
                             Margin="10, 10, 10, 10"/>
                 
                 <TextBox Grid.Row="3" Grid.Column="1"
+                         x:Name="DiscriptionTextBox"
                          Margin="10, 10, 10, 10"/>
                 
                 <ComboBox Grid.Row="4" Grid.Column="1"
@@ -87,7 +90,8 @@
                     Content="Готово"
                     Style="{StaticResource TransactionAddButton}"
                     VerticalAlignment="Center" HorizontalAlignment="Center"
-                    Margin="10, 10, 10, 10"></Button>
+                    Margin="10, 10, 10, 10"
+                    Click="AddRowButton_OnClick"/>
         </Grid>
     </Border>
 </Window>
