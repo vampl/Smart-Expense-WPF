@@ -7,7 +7,6 @@ using SmartExpense.MVVM.View;
 
 namespace SmartExpense.MVVM.ViewModel;
 
-/* ToDo: Створити механізм додавання рахунків */
 public class AccountViewModel : ObservableObject
 {
     // 
