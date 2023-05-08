@@ -74,10 +74,10 @@ public class HomeViewModel : ObservableObject
         {
             var applicationContext = new ApplicationContext();
 
-           Transactions = applicationContext.GetUserTransactions("10000001");
-            Income = applicationContext.GetUserIncome("10000001");
-            Outcome = applicationContext.GetUserOutcome("10000001");
-            Balance = applicationContext.GetUserBalance("10000001");
+           Transactions = applicationContext.GetUserTransactions();
+            Income = applicationContext.GetUserIncome();
+            Outcome = applicationContext.GetUserOutcome();
+            Balance = applicationContext.GetUserBalance();
 
             PieSeriesCollection = CreatePieChartFromData();
         }
