@@ -41,8 +41,7 @@
             <DataGrid Grid.Row="1"
                 x:Name="TransactionDataGrid"
                 Style="{StaticResource TTransactionDataGridStyle}"
-                ItemsSource="{Binding Transactions}"
-                IsTextSearchEnabled="True">
+                ItemsSource="{Binding Transactions}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Сума"
                                         Binding="{Binding Path=Amount}"/>

@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:SmartExpense.MVVM.View"
         xmlns:viewModel="clr-namespace:SmartExpense.MVVM.ViewModel"
         mc:Ignorable="d"
@@ -25,9 +26,19 @@
             <StackPanel Grid.Row="0"
                         Orientation="Horizontal" FlowDirection="LeftToRight" 
                         HorizontalAlignment="Right" VerticalAlignment="Center">
-                <Button Tag="CloseButton"
+                <Button x:Name="CloseButton"
                         Content="&#x2715;"
-                        Style="{StaticResource ControlButtonStyle}"/>
+                        Style="{StaticResource ControlButtonStyle}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <i:CallMethodAction MethodName="Close"
+                                                TargetObject="{Binding 
+                                                RelativeSource={RelativeSource
+                                                Mode=FindAncestor,
+                                                AncestorType=Window}}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
             </StackPanel>
             
             <Grid Grid.Row="1">
@@ -62,36 +73,54 @@
                 
                 <TextBox Grid.Row="0" Grid.Column="1"
                          x:Name="AmountTextBox"
-                         Margin="10, 10, 10, 10"/>
+                         Margin="10, 10, 10, 10"
+                         Text="{Binding Amount, Mode=TwoWay}"/>
                 
                 <ComboBox Grid.Row="1" Grid.Column="1"
                           x:Name="TypeComboBox"
                           Margin="10, 10, 10, 10"
                           IsEditable="False"
+                          Text="{Binding Type, Mode=TwoWay}"
                           ItemsSource="{Binding TransactionTypes}" />
                 
                 <DatePicker Grid.Row="2" Grid.Column="1"
                             x:Name="DatePicker"
+                            Text="{Binding CreationDate, Mode=TwoWay}"
+                            SelectedDate="2000-12-31" SelectedDateFormat="Short"
                             Margin="10, 10, 10, 10"/>
                 
                 <TextBox Grid.Row="3" Grid.Column="1"
-                         x:Name="DiscriptionTextBox"
+                         x:Name="DescriptionTextBox"
+                         Text="{Binding Description, Mode=TwoWay}"
                          Margin="10, 10, 10, 10"/>
                 
                 <ComboBox Grid.Row="4" Grid.Column="1"
                           x:Name="AccountsComboBox"
                           Margin="10, 10, 10, 10"
                           IsEditable="False"
+                          Text="{Binding AccountTitle, Mode=TwoWay}"
                           ItemsSource="{Binding AccountsTitle }"/>
             </Grid>
             
             <Button Grid.Row="2"
                     x:Name="AddRowButton"
-                    Content="Готово"
+                    Content="Додати"
                     Style="{StaticResource TransactionAddButton}"
                     VerticalAlignment="Center" HorizontalAlignment="Center"
                     Margin="10, 10, 10, 10"
-                    Click="AddRowButton_OnClick"/>
+                    Command="{Binding Path=DataContext.RowAddCommand,
+                    RelativeSource={RelativeSource AncestorType={x:Type Window}}}" 
+                    CommandParameter="{Binding}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Click">
+                            <i:CallMethodAction MethodName="Close"
+                                                TargetObject="{Binding 
+                                                    RelativeSource={RelativeSource
+                                                    Mode=FindAncestor,
+                                                    AncestorType=Window}}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+            </Button>
         </Grid>
     </Border>
 </Window>

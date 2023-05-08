@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Windows;
+﻿using System.Collections.ObjectModel;
 using SmartExpense.Core;
 using SmartExpense.MVVM.Model;
 using SmartExpense.MVVM.View;
@@ -32,6 +30,10 @@ public class TransactionViewModel : ObservableObject
 
         if (rowIndex > -1 && rowIndex < Transactions.Count)
             Transactions.RemoveAt(rowIndex);
+
+        var applicationContext = new ApplicationContext();
+        var transactionModel = (TransactionModel)parameter;
+        applicationContext.DeleteTransaction(transactionModel);
     }
     
     // Команда для виклику операції додання рядка в DataGrid елементу
@@ -41,31 +43,15 @@ public class TransactionViewModel : ObservableObject
     
     private void AddRow(object parameter)
     {
-        new TransactionFormView(AddNewTransaction).Show();
+        new TransactionFormView().Show();
+        var applicationContext = new ApplicationContext();
+        Transactions = applicationContext.GetUserTransactions();
     }
     
-    private void AddNewTransaction(TransactionModel transaction)
-    {
-        try
-        {
-            Transactions.Add(transaction);
-            
-            // var applicationContext = new ApplicationContext();
-            // applicationContext.Transactions.Add(transaction);
-            // applicationContext.SaveChanges();
-        }
-        catch (Exception e)
-        {
-            MessageBox.Show(e.ToString());
-        }
-        
-    }
-
-
     public TransactionViewModel()
     {
         var applicationContext = new ApplicationContext();
 
-        Transactions = applicationContext.GetUserTransactions("10000001");
+        Transactions = applicationContext.GetUserTransactions();
     }
 }
