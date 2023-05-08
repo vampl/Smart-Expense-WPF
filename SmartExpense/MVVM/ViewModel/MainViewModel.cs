@@ -7,8 +7,8 @@ namespace SmartExpense.MVVM.ViewModel;
 
 public class MainViewModel : ObservableObject
 {
-    private UserModel _user = null!;
-    protected UserModel User { get; set; } = new UserModel { Username = "10000001", Password = "10000001"};
+    private static UserModel _user = null!;
+    public static UserModel User { get; set; }
 
     public RelayCommand HomeViewCommand { get; set; } = null!;
     public RelayCommand TransactionViewCommand { get; set; } = null!;

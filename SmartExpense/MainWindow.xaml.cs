@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Input;
+using SmartExpense.MVVM.View;
 
 namespace SmartExpense
 {
@@ -11,6 +12,7 @@ namespace SmartExpense
         public MainWindow()
         {
             InitializeComponent();
+            new LoginView().ShowDialog();
         }
         
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
@@ -21,7 +23,7 @@ namespace SmartExpense
 
         private void MinimizeButton_OnClick(object sender, RoutedEventArgs e)
         {
-            this.WindowState = WindowState.Minimized;
+            WindowState = WindowState.Minimized;
         }
 
         private void CloseButton_OnClick(object sender, RoutedEventArgs e)
