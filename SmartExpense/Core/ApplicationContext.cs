@@ -12,7 +12,11 @@ public class ApplicationContext : DbContext
     private const string TEXT_INCOME_TYPE_DEFINOTION = "Надходження";
     private const string TEXT_OUTCOME_TYPE_DEFINOTION = "Витрата";
 
-    private UserModel CurrentUser { get; set; }
+    public static UserModel CurrentUser { get; set; } = new UserModel
+    {
+        Username = "default",
+        Password = "default",
+    };
 
     public DbSet<UserModel> Users { get; set; } = null!;
     public DbSet<TransactionModel> Transactions { get; set; } = null!;
@@ -42,7 +46,7 @@ public class ApplicationContext : DbContext
             MessageBox.Show(e.Message);
         }
     }
-    
+
     /*protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -58,20 +62,88 @@ public class ApplicationContext : DbContext
         });
     }*/
 
-    public decimal GetUserBalance(string username) =>
-        Accounts.Where(account => account.User.Username == username).Sum(account => account.Amount);
+    public static void SetUser(UserModel user)
+    {
+        CurrentUser = user;
+    }
 
-    public decimal GetUserIncome(string username) =>
-        Transactions.Where(transaction => transaction.User.Username == username && transaction.Type == TEXT_INCOME_TYPE_DEFINOTION)
+    public UserModel GetUser()
+    {
+        return CurrentUser;
+    }
+
+    public void AddTransaction(TransactionModel transactionModel)
+    {
+        var updatedAccount = Accounts.Where(account => account.UserId == transactionModel.UserId)
+            .FirstOrDefault(account => account.Title == transactionModel.AccountTitle);
+        
+        if(updatedAccount == null)
+            return;
+        
+        if (transactionModel.Type == TEXT_INCOME_TYPE_DEFINOTION)
+        {
+            updatedAccount.Amount += transactionModel.Amount;
+            Accounts.Update(updatedAccount);
+        }
+        
+        if (transactionModel.Type == TEXT_OUTCOME_TYPE_DEFINOTION)
+        {
+            updatedAccount.Amount -= transactionModel.Amount;
+            Accounts.Update(updatedAccount);
+        }
+        
+        Transactions.Add(transactionModel);
+        SaveChanges();
+    }
+
+    public void DeleteTransaction(TransactionModel transactionModel)
+    {
+        var updatedAccount = Accounts.Where(account => account.UserId == transactionModel.UserId)
+            .FirstOrDefault(account => account.Title == transactionModel.AccountTitle);
+        
+        if(updatedAccount == null)
+            return;
+        
+        if (transactionModel.Type == TEXT_INCOME_TYPE_DEFINOTION)
+        {
+            updatedAccount.Amount -= transactionModel.Amount;
+            Accounts.Update(updatedAccount);
+        }
+        
+        if (transactionModel.Type == TEXT_OUTCOME_TYPE_DEFINOTION)
+        {
+            updatedAccount.Amount += transactionModel.Amount;
+            Accounts.Update(updatedAccount);
+        }
+        
+        Transactions.Remove(transactionModel);
+        SaveChanges();
+    }
+
+    public void AddAccount(AccountModel accountModel)
+    {
+    }
+
+    public void DeleteAccount(AccountModel accountModel)
+    {
+    }
+
+    public decimal GetUserBalance() =>
+        Accounts.Where(account => account.User.Username == CurrentUser.Username).Sum(account => account.Amount);
+
+    public decimal GetUserIncome() =>
+        Transactions.Where(transaction => transaction.User.Username == CurrentUser.Username &&
+                                          transaction.Type == TEXT_INCOME_TYPE_DEFINOTION)
             .Sum(transaction => transaction.Amount);
 
-    public decimal GetUserOutcome(string username) =>
-        Transactions.Where(transaction => transaction.User.Username == username && transaction.Type == TEXT_OUTCOME_TYPE_DEFINOTION)
+    public decimal GetUserOutcome() =>
+        Transactions.Where(transaction => transaction.User.Username == CurrentUser.Username &&
+                                          transaction.Type == TEXT_OUTCOME_TYPE_DEFINOTION)
             .Sum(x => x.Amount);
 
-    public ObservableCollection<TransactionModel> GetUserTransactions(string username) =>
-        new(Transactions.Where(x => x.User.Username == username));
+    public ObservableCollection<TransactionModel> GetUserTransactions() =>
+        new(Transactions.Where(x => x.User.Username == CurrentUser.Username));
 
-    public ObservableCollection<AccountModel> GetUserAccounts(string username) =>
-        new(Accounts.Where(x => x.User.Username == username));
+    public ObservableCollection<AccountModel> GetUserAccounts() =>
+        new(Accounts.Where(x => x.User.Username == CurrentUser.Username));
 }
