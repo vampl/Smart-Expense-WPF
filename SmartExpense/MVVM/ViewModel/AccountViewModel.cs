@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Windows;
+﻿using System.Collections.ObjectModel;
 using SmartExpense.Core;
 using SmartExpense.MVVM.Model;
 using SmartExpense.MVVM.View;
@@ -9,7 +7,7 @@ namespace SmartExpense.MVVM.ViewModel;
 
 public class AccountViewModel : ObservableObject
 {
-    // 
+    // Колекція усіх наявних в користувача рахунків
     private ObservableCollection<AccountModel> _accounts;
     public ObservableCollection<AccountModel> Accounts
     {
@@ -32,6 +30,10 @@ public class AccountViewModel : ObservableObject
 
         if (rowIndex > -1 && rowIndex < Accounts.Count)
             Accounts.RemoveAt(rowIndex);
+
+        var applicationContext = new ApplicationContext();
+        applicationContext.Accounts.Remove((AccountModel)parameter);
+        applicationContext.SaveChanges();
     }
     
     // Команда для виклику операції додання рядка в DataGrid елементу
@@ -41,30 +43,15 @@ public class AccountViewModel : ObservableObject
     
     private void AddRow(object parameter)
     {
-        new AccountFormView(AddNewAccount).Show();
-    }
-    
-    private void AddNewAccount(AccountModel account)
-    {
-        try
-        {
-            Accounts.Add(account);
-            
-            // var applicationContext = new ApplicationContext();
-            // applicationContext.Transactions.Add(transaction);
-            // applicationContext.SaveChanges();
-        }
-        catch (Exception e)
-        {
-            MessageBox.Show(e.ToString());
-        }
-        
+        new AccountFormView().Show();
+        var applicationContext = new ApplicationContext();
+        Accounts = applicationContext.GetUserAccounts();
     }
 
     public AccountViewModel()
     {
         var applicationContext = new ApplicationContext();
         
-        Accounts = applicationContext.GetUserAccounts("10000001");
+        Accounts = applicationContext.GetUserAccounts();
     }
 }
