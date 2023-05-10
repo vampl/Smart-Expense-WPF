@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModel="clr-namespace:SmartExpense.MVVM.ViewModel"
         mc:Ignorable="d"
+        x:Name="SmartExpense"
         Height="480" Width="860"
         WindowStyle="None" ResizeMode="CanMinimize"
         AllowsTransparency="True" Background="Transparent">
@@ -34,15 +35,18 @@
             
             <StackPanel Grid.Row="1" Grid.Column="0">
                 <RadioButton Content="Головна"
+                             x:Name="MainButton"
                              IsChecked="True"
                              Command="{Binding HomeViewCommand}"
                              Style="{StaticResource MenuButtonStyle}"/>
                 
                 <RadioButton Content="Транзакції"
+                             x:Name="TransactionButton"
                              Command="{Binding TransactionViewCommand}"
                              Style="{StaticResource MenuButtonStyle}"/>
                 
                 <RadioButton Content="Рахунки"
+                             x:Name="AccountButton"
                              Command="{Binding AccountViewCommand}"
                              Style="{StaticResource MenuButtonStyle}"/>
             </StackPanel>
@@ -50,17 +54,18 @@
             <StackPanel Grid.Row="0" Grid.Column="1"
                         Orientation="Horizontal" FlowDirection="LeftToRight" 
                         HorizontalAlignment="Right" VerticalAlignment="Center">
-                <Button Tag="MinimizeButton"
+                <Button x:Name="MinimizeButton"
                         Content="&#128469;"
                         Click="MinimizeButton_OnClick"
                         Style="{StaticResource ControlButtonStyle}"/>
-                <Button Tag="CloseButton"
+                <Button x:Name="CloseButton"
                         Content="&#x2715;"
                         Click="CloseButton_OnClick"
                         Style="{StaticResource ControlButtonStyle}"/>
             </StackPanel>
             
             <ContentControl Grid.Row="1" Grid.Column="1"
+                            x:Name="ContentControl"
                             Margin="10, 0, 10, 10"
                             Content="{Binding CurrentView}"/>
         </Grid>

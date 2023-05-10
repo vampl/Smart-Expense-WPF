@@ -74,7 +74,7 @@ public class HomeViewModel : ObservableObject
         {
             var applicationContext = new ApplicationContext();
 
-           Transactions = applicationContext.GetUserTransactions();
+            Transactions = applicationContext.GetUserTransactions();
             Income = applicationContext.GetUserIncome();
             Outcome = applicationContext.GetUserOutcome();
             Balance = applicationContext.GetUserBalance();

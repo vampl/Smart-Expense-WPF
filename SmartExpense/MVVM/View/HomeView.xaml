@@ -57,7 +57,7 @@
                 </Grid.ColumnDefinitions>
                 
                 <DataGrid Grid.Column="0"
-                          x:Name="TransactionDataGrid"
+                          x:Name="HTransactionDataGrid"
                           Style="{StaticResource HTransactionDataGridStyle}"
                           ItemsSource="{Binding Transactions}">
                     <DataGrid.Columns>
